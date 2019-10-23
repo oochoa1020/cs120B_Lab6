@@ -21,7 +21,7 @@ unsigned long _avr_timer_cntcurr = 0;
 void TimerOn() {
 	TCCR1B = 0x0B;
 	OCR1A = 125;
-	TIMSKI = 0x02;
+	TIMSK1 = 0x02;
 	TCNT1 = 0;
 
 	_avr_timer_cntcurr = _avr_timer_M;
@@ -99,7 +99,7 @@ void tick() {
 int main(void) {
 //	DDRA = 0x00; PORTA = 0xFF;
 	DDRB = 0xFF; PORTB = 0x00;
-	state = wait;
+	state = light0;
 	TimerSet(1000);
 	TimerOn();
 	while(1) {

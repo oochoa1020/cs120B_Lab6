@@ -27,125 +27,34 @@ echo ======================================================\n
 echo Running all tests..."\n\n
 
 # Add tests below
-test "PINA: 0x00 =>PORTB: 0x07”
-set state = wait
-setPINA 0x00
-continue 2
-expectPORTB 0x07
+test "1 second :  PORTB: 0x02”
+set state = light0
+continue 1
+expectPORTB 0x02
 checkResult
 
-test "PINA: 0x00, 0x01 =>PORTB: 0x08”
-set state = wait
-setPINA 0x00
-continue 2
-setPINA 0x01
-continue 2
-expectPORTB 0x08
-expect state press0
+test "2 second :  PORTB: 0x04”
+set state = light0
+continue 1
+continue 1
+expectPORTB 0x04
 checkResult
 
-test "PINA: 0x00, 0x01, 0x01 =>PORTB: 0x08”
-set state = wait
-set tmpB = 0x07
-setPINA 0x00
-continue 2
-setPINA 0x01
-continue 2
-setPINA 0x01
-continue 2
-expectPORTB 0x08
-expect state press0
+test "3 second :  PORTB: 0x01”
+set state = light0
+continue 1
+continue 1
+continue 1
+expectPORTB 0x01
 checkResult
 
-test "PINA: 0x00, 0x01, 0x00, 0x01 =>PORTB: 0x09”
-set state = wait
-set tmpB = 0x07
-setPINA 0x00
-continue 2
-setPINA 0x01
-continue 2
-setPINA 0x00
-continue 2
-setPINA 0x01
-continue 2
-expectPORTB 0x09
-expect state press0
-checkResult
-
-test "PINA: 0x00, 0x01, 0x00, 0x01, 0x00, 0x01 =>PORTB: 0x09”
-set state = wait
-set tmpB = 0x07
-setPINA 0x00
-continue 2
-setPINA 0x01
-continue 2
-setPINA 0x00
-continue 2
-setPINA 0x01
-continue 2
-setPINA 0x00
-continue 2
-setPINA 0x01
-continue 2
-expectPORTB 0x09
-expect state press0
-checkResult
-
-test "PINA: 0x00, 0x01, 0x00, 0x01, 0x00, 0x02=>PORTB: 0x08”
-set state = wait
-set tmpB = 0x07
-setPINA 0x00
-continue 2
-setPINA 0x01
-continue 2
-setPINA 0x00
-continue 2
-setPINA 0x01
-continue 2
-setPINA 0x00
-continue 2
-setPINA 0x02
-continue 2
-expectPORTB 0x08
-expect state press1
-checkResult
-
-test "PINA: 0x00, 0x01, 0x00, 0x01, 0x03=>PORTB: 0x00”
-set state = wait
-set tmpB = 0x07
-setPINA 0x00
-continue 2
-setPINA 0x01
-continue 2
-setPINA 0x00
-continue 2
-setPINA 0x01
-continue 2
-setPINA 0x03
-continue 2
-expectPORTB 0x00
-expect state both
-checkResult
-
-test "PINA: 0x00, 0x01, 0x00, 0x01, 0x03, 0x00, 0x02=>PORTB: 0x00”
-set state = wait
-set tmpB = 0x07
-setPINA 0x00
-continue 2
-setPINA 0x01
-continue 2
-setPINA 0x00
-continue 2
-setPINA 0x01
-continue 2
-setPINA 0x03
-continue 2
-setPINA 0x00
-continue 2
-setPINA 0x02
-continue 2
-expectPORTB 0x00
-expect state press1
+test "4 second :  PORTB: 0x02”
+set state = light0
+continue 1
+continue 1
+continue 1
+continue 1
+expectPORTB 0x02
 checkResult
 
 # Report on how many tests passed/tests ran
