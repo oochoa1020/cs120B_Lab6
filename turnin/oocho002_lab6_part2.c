@@ -57,7 +57,8 @@ void tick() {
 		
 		case light0:
 		{
-			if ((PINA & 0x01) == 0x01) {
+			PORTB = 0x01;
+			if ((~PINA & 0x01) == 0x01) {
 				state = wait;
 				break;
 			}
@@ -66,7 +67,8 @@ void tick() {
 		}
 		case light1:
 		{
-			if ((PINA & 0x01) == 0x01) {
+			PORTB = 0x02;
+			if ((~PINA & 0x01) == 0x01) {
                                 state = wait;
                                 break;
                         }
@@ -75,7 +77,8 @@ void tick() {
 		}
 		case light2:
 		{
-			if ((PINA & 0x01) == 0x01) {
+			PORTB = 0x04
+			if ((~PINA & 0x01) == 0x01) {
                                 state = wait;
                                 break;
                         }
@@ -84,22 +87,22 @@ void tick() {
 		}
 		case wait:
 		{
-			if ((PINA & 0x01) == 0x01) {
+			if ((~PINA & 0x01) == 0x01) {
 				state = wait;
 				break;
 			}
-			else if ((PINA & 0x01) == 0x00) {
+			else if ((~PINA & 0x01) == 0x00) {
                                 state = restart;
 				break;
                         }
 		}
 		case restart:
                 {
-                        if ((PINA & 0x01) == 0x00) {
+                        if ((~PINA & 0x01) == 0x00) {
                                 state = restart;
 				break;
                         }
-                        else if ((PINA & 0x01) == 0x01) {
+                        else if ((~PINA & 0x01) == 0x01) {
                                 state = light0;
 				break;
                         }
