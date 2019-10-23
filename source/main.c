@@ -51,25 +51,55 @@ void TimerSet(unsigned long M) {
 }
 
 
-enum states {light0, light1, light2} state;
+enum states {light0, light1, light2, wait, restart} state;
 void tick() {
 	switch(state) {
 		
 		case light0:
 		{
+			if ((PINA & 0x01) == 0x01) {
+				state = wait;
+				break;
+			}
 			state = light1;
 			break;
 		}
 		case light1:
-		{		
+		{
+			if ((PINA & 0x01) == 0x01) {
+                                state = wait;
+                                break;
+                        }
 			state = light2;
                         break;
 		}
 		case light2:
 		{
+			if ((PINA & 0x01) == 0x01) {
+                                state = wait;
+                                break;
+                        }
 			state = light0;
                         break;
 		}
+		case wait:
+		{
+			if ((PINA & 0x01) == 0x01) {
+				state = wait;
+			}
+			if ((PINA & 0x01) == 0x00) {
+                                state = restart;
+                        }
+		}
+		case restart:
+                {
+                        if ((PINA & 0x01) == 0x00) {
+                                state = restart;
+                        }
+                        if ((PINA & 0x01) == 0x01) {
+                                state = light0;
+                        }
+                }
 		default:
 		{
 			state = light0;
@@ -93,6 +123,14 @@ void tick() {
 			PORTB = 0x04;
                         break;
 		}
+		case wait:
+                {
+                        break;
+                }
+		case restart:
+                {
+                        break;
+                }
         }
 }
 
